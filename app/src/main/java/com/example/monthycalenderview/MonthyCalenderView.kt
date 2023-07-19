@@ -1,6 +1,5 @@
 package com.example.monthycalenderview
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -136,10 +135,10 @@ fun MonthlyCalenderView() {
                                     today
                                 ))
                             ) {
-                                Log.e(
-                                    "selection",
-                                    "${selection.startDate}>>>>${selection.endDate}>>>>>date>>>${day.date}"
-                                )
+                                /* Log.e(
+                                     "selection",
+                                     "${selection.startDate}>>>>${selection.endDate}>>>>>date>>>${day.date}"
+                                 )*/
                                 if (day.date.isBefore(selection.startDate) && checkOutView) {
                                     Toast.makeText(
                                         context,
@@ -265,7 +264,7 @@ fun Day(
     onClick: (CalendarDay) -> Unit,
 ) {
     var textColor = primaryColor
-    Log.e("", "${selection.startDate}>>>${selection.endDate}")
+//    Log.e("", "${selection.startDate}>>>${selection.endDate}")
     Box(
         modifier = Modifier
             .aspectRatio(1f)

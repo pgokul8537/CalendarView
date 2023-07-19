@@ -38,7 +38,7 @@ import com.example.monthycalenderview.SelectDateTimeViewModel
 
 @Composable
 fun CheckInOutCompose(
-    size: Dp = 100.dp,
+    height: Dp = 80.dp,
     padding: Dp = 6.dp,
     toggleShape: Shape = CircleShape,
     click: Boolean = false,
@@ -51,16 +51,17 @@ fun CheckInOutCompose(
     var widthOfBox by remember { mutableStateOf(0.dp) }
     var heightOfBox by remember { mutableStateOf(0.dp) }
     val checkData = mViewModel.checkState.value
-    var sizeInDp by remember { mutableStateOf(0.dp) }
+    var isCheckOutSelected by remember { mutableStateOf(false) }
+    var isCheckInSelected by remember { mutableStateOf(true) }
 
     val offset by animateDpAsState(
-        targetValue = if (!click) 0.dp else sizeInDp / 2, animationSpec = animationSpec
+        targetValue = if (!click) 0.dp else widthOfBox, animationSpec = animationSpec
     )
     Box(
         modifier = Modifier
             .padding(top = 20.dp)
             .fillMaxWidth()
-            .height(80.dp)
+            .height(height)
             .onSizeChanged {
                 size = it
             }
@@ -71,10 +72,9 @@ fun CheckInOutCompose(
         Box(
             modifier = Modifier
                 .then(with(LocalDensity.current) {
-                    sizeInDp = size.width.toDp()
                     widthOfBox = size.width.toDp() / 2
                     heightOfBox = size.height.toDp()
-                    Modifier.size(width = size.width.toDp() / 2, height = size.height.toDp())
+                    Modifier.size(width = widthOfBox, height = heightOfBox)
 
                 })
                 .offset(x = offset)
@@ -91,9 +91,12 @@ fun CheckInOutCompose(
                     .height(heightOfBox)
                     .padding(start = 15.dp)
                     .clickable {
-                        if (checkData.selection.name == "Out") {
-                            checkData.selection = CheckInOutSelection.In
+                        println(isCheckInSelected)
+                        println(isCheckOutSelected)
+                        if (isCheckOutSelected) {
                             onClick()
+                            isCheckInSelected = true
+                            isCheckOutSelected = false
                         }
                     },
                 horizontalAlignment = Alignment.Start,
@@ -111,9 +114,12 @@ fun CheckInOutCompose(
                     .height(heightOfBox)
                     .padding(start = 15.dp)
                     .clickable {
-                        if (checkData.selection.name == "In") {
-                            checkData.selection = CheckInOutSelection.Out
+                        println(isCheckInSelected)
+                        println(isCheckOutSelected)
+                        if (isCheckInSelected) {
                             onClick()
+                            isCheckInSelected = false
+                            isCheckOutSelected = true
                         }
                     },
                 horizontalAlignment = Alignment.Start,
