@@ -105,11 +105,9 @@ fun MonthlyCalenderView() {
                 val coroutineScope = rememberCoroutineScope()
                 val visibleMonth = rememberFirstVisibleMonthAfterScroll(state)
                 var checkOutView by remember { mutableStateOf(false) }
-                var isClicked by remember { mutableStateOf(false) }
-
                 CheckInOutCompose(
-                    onClick = { isClicked = !isClicked },
-                    click = isClicked,
+                    onClick = { checkOutView = !checkOutView },
+                    click = checkOutView,
                 )
                 CalendarTitle(
                     modifier = Modifier.padding(vertical = 10.dp, horizontal = 8.dp),

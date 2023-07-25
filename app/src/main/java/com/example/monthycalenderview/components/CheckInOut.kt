@@ -91,8 +91,6 @@ fun CheckInOutCompose(
                     .height(heightOfBox)
                     .padding(start = 15.dp)
                     .clickable {
-                        println(isCheckInSelected)
-                        println(isCheckOutSelected)
                         if (isCheckOutSelected) {
                             onClick()
                             isCheckInSelected = true
@@ -114,8 +112,6 @@ fun CheckInOutCompose(
                     .height(heightOfBox)
                     .padding(start = 15.dp)
                     .clickable {
-                        println(isCheckInSelected)
-                        println(isCheckOutSelected)
                         if (isCheckInSelected) {
                             onClick()
                             isCheckInSelected = false
